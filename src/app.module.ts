@@ -7,7 +7,7 @@ import { CompanySchema } from './interfaces/company.schema';
 @Module({
   imports: [
     MongooseModule.forRoot(
-      'mongodb+srv://admin:6t9VwUwqD89nriW@clusterreclameaqui.krwdl.mongodb.net/companybackend?retryWrites=true&w=majority',
+      'mongodb+srv://admin:6t9VwUwqD89nriW@clusterreclameaqui.krwdl.mongodb.net/companyBackend?retryWrites=true&w=majority',
       { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }
     ),
       MongooseModule.forFeature([
