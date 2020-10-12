@@ -10,7 +10,7 @@ async function bootstrap() {
     {
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://user:Z1wfdAr8TTKl@174.129.50.31:5672/reclameAquiHost'],
+        urls: [`amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_URL}`],
         noAck: false,
         queue: 'company-backend'
       }

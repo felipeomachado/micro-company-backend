@@ -1,5 +1,4 @@
 
-import { RpcException } from '@nestjs/microservices';
 import { getModelToken } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { AppService } from './app.service';
@@ -51,8 +50,6 @@ describe('CompaniesService', () => {
 
       const companyUpdated = {name: 'Companhia B'};
 
-      mockModel.findById.mockReturnValue(validCompany);
-      mockModel.findOne.mockReturnValue(validCompany);
       mockModel.findByIdAndUpdate.mockReturnValue({
         ...validCompany,
         ...companyUpdated
@@ -60,27 +57,8 @@ describe('CompaniesService', () => {
 
       await service.updateCompany(validCompany._id, {...validCompany, name: companyUpdated.name});
 
-      expect(mockModel.findById).toHaveBeenCalledTimes(1);
-      expect(mockModel.findOne).toHaveBeenCalledTimes(1);
       expect(mockModel.findByIdAndUpdate).toHaveBeenCalledTimes(1);
       
-    });
-
-    it('should return a exception when updating with an existing company name', async () => {
-      const companyUpdated = {_id: '123', name: validCompany.name};
-
-      mockModel.findById.mockReturnValue(companyUpdated);
-      mockModel.findOne.mockReturnValue(validCompany);
-      mockModel.findByIdAndUpdate.mockReturnValue(null);
-      
-      await service.updateCompany(companyUpdated._id, companyUpdated).catch(exception => {
-        expect(exception).toBeInstanceOf(RpcException);
-        expect(exception).toMatchObject({
-          message: 'This name is already being used by another company'
-        })
-      })
-    
-      expect(mockModel.findById).toHaveBeenCalledTimes(1);
     });
   })
   
@@ -107,22 +85,5 @@ describe('CompaniesService', () => {
       expect(companyFound).toMatchObject({name: validCompany.name});
       expect(mockModel.findById).toHaveBeenCalledTimes(1);
     });
-
-    it('should return a exception when does not to find a company', async () => {
-      mockModel.findById.mockReturnValue(null);
-      
-      await service.findCompanyByIdOrThrow('123').catch(exception => {
-        expect(exception).toBeInstanceOf(RpcException);
-        expect(exception).toMatchObject(
-          {
-            message:'Company not found'
-          });
-      })
-
-      expect(mockModel.findById).toHaveBeenCalledTimes(1);
-
-    });
   })
-
-  
 });
