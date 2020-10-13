@@ -12,7 +12,8 @@ async function bootstrap() {
       options: {
         urls: [`amqp://${process.env.RABBITMQ_USER}:${process.env.RABBITMQ_PASSWORD}@${process.env.RABBITMQ_URL}`],
         noAck: false,
-        queue: 'company-backend'
+        queue: 'company-backend',
+        port: process.env.PORT || 3000
       }
     }
     );
