@@ -1,0 +1,10 @@
+---
+applications:
+      - name: micro-company-backend-reclameaqui
+        path: dist
+        instances: 1
+        memory: 128MB
+        disk_quota: 1GB
+        command: node main.js
+        health-check-type: none
+        
