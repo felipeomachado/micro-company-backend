@@ -14,14 +14,16 @@ The project is structured in three microservices responsible for processing info
 The microservices need only a instance of the NoSql MongoDB database to run, each.
 
 The api-gateway exposes all necessary endpoints. Ex:
- - Company Domain
- -- POST - /api/v1/companies
- -- GET - /api/v1/companies
- -- GET - /api/v1/companies/{id}
- -- PUT - /api/v1/companies
- - Complain Domain
- -- POST - /api/v1/complains
- -- GET - /api/v1/complains
+
+**Company Domain**
+ - POST - /api/v1/companies
+ - GET - /api/v1/companies
+ - GET - /api/v1/companies/{id}
+ - PUT - /api/v1/companies
+
+**Complain Domain**
+ - POST - /api/v1/complains
+ - GET - /api/v1/complains
 
 ## Deploy and Run on Cloud
 
@@ -347,5 +349,7 @@ Response:
 You can test request calls using the urls below:
 
 https://api-gateway-reclameaqui.herokuapp.com/api/v1/companies
+
 https://api-gateway-reclameaqui.herokuapp.com/api/v1/locales
+
 https://api-gateway-reclameaqui.herokuapp.com/api/v1/complains
